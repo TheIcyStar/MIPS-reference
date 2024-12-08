@@ -119,8 +119,8 @@
 
   //subtract
   [SUB rd, rs, rt],[Subtract],[rd=rs-rt], [`000000`],[`rs`],[`rt`],[`rd`],[`00000`],[`100010`],
-  [SUBU rd, rs, rt],[Subtract Unsigned],[rd=rs-rt], [`000000`],[`rs`],[`rt`],[`rd`],[`00000`],[`100011`],
-  [SUBI rd, rs, imm],[Subtract Immediate], grid.cell(colspan: 7, [(Converted by assembler)\*]),
+  [SUBU rd, rs, rt],[Subtract unsigned],[rd=rs-rt], [`000000`],[`rs`],[`rt`],[`rd`],[`00000`],[`100011`],
+  [SUBI rd, rs, imm],[Subtract immediate], grid.cell(colspan: 7, [(Converted by assembler)\*]),
   //Learned something new today: SUBI does not appear to exist, the assembler just uses ADDI then SUB!
 
   //logical
@@ -158,24 +158,20 @@
   [BLEZ rs, offset],[Branch if <= 0],[if rs<=0: pc+=offset*4],[`000110`],[`rs`],[`00000`],grid.cell(colspan: 3, [offset]),
   [J target],[Jump],[pc=pc_upper|(target<\<2)],[`000010`],grid.cell(colspan: 5, [target]),
   [JAL target],[Jump and link],[`$ra`=pc; pc=target<\<2],[`000011`],grid.cell(colspan: 5, [target]),
-  [JR rs],[Jump Register (used w/`$ra`)],[pc=rs],[`000000`],[`rs`],grid.cell(colspan: 3, [`00000 00000 00000`]),[`001000`],
+  [JR rs],[Jump register (used w/`$ra`)],[pc=rs],[`000000`],[`rs`],grid.cell(colspan: 3, [`00000 00000 00000`]),[`001000`],
   [SYSCALL],[System call],[epc=pc; pc=0x3c],[`000000`],grid.cell(colspan: 4, [`00000 00000 00000 00000`]), [`001100`],
 
 
   grid.cell(colspan: 9, [#h(2%) _Memory and Data Management_]),
   // [LB rt,offset(rs)],[Load byte],[rt=\*(b\*)(offset+rs)],[`100000`],[`rs`],[`rt`],grid.cell(colspan: 3, [offset]),
   // [LH rt,offset(rs)],[Load halfword],[rt=\*(hw\*)(offset+rs)],[`100001`],[`rs`],[`rt`],grid.cell(colspan: 3, [offset]),
-  [LW rt,offset(rs)],[Load word from memory],[rt=\*(int\*)(offset+rs)],[`100011`],[`rs`],[`rt`],grid.cell(colspan: 3, [offset]),
+  [LW rt, offset(rs)],[Load word from memory],[rt=\*(int\*)(offset+rs)],[`100011`],[`rs`],[`rt`],grid.cell(colspan: 3, [offset]),
   // [SB rt,offset(rs)],[Store byte],[\*(b\*)(offset+rs)=rt],[`101000`],[`rs`],[`rt`],grid.cell(colspan: 3, [offset]),
   // [SH rt,offset(rs)],[Store half],[\*(hw\*)(offset+rs)=rt],[`101001`],[`rs`],[`rt`],grid.cell(colspan: 3, [offset]),
-  [SW rt,offset(rs)],[Store word to memory],[\*(int\*)(offset+rs)=rt],[`101011`],[`rs`],[`rt`],grid.cell(colspan: 3, [offset]),
+  [SW rt, offset(rs)],[Store word to memory],[\*(int\*)(offset+rs)=rt],[`101011`],[`rs`],[`rt`],grid.cell(colspan: 3, [offset]),
   [LI rd, imm],[Load immediate],[rd=imm],grid.cell(colspan: 6, [(Converted by assembler)\*]),
-  [LA rd, label],[Load Address of variable],[rd=(label address)],grid.cell(colspan: 6, [(Converted by assembler)\*]),
+  [LA rd, label],[Load address of variable],[rd=(label address)],grid.cell(colspan: 6, [(Converted by assembler)\*]),
   [MOVE rd, rs],[Copy register contents],[rd=rs],grid.cell(colspan: 6, [(Converted by assembler)\*]),
-
-
-
 )
 
 \* Instruction is not basic; it gets turned into one or more basic instructions by the assembler.
-

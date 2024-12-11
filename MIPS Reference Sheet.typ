@@ -97,7 +97,7 @@
   ],
   [
     *J-Format Instructions*
-    - *op* [6 bits]: opcode
+    - *op* [6 bits]: opcode  (See table)
     - *address* [26 bits]: Address of target label
   ],
 )
@@ -110,7 +110,7 @@
   inset: (4pt),
 
   [*Instruction*],[*Name*],[*Action*],grid.cell(colspan: 6, [*Machine Code Bitfields*]),
-  grid.cell(colspan: 9, [#h(2%) _Arithmetic / Logic instructions_]),
+  grid.cell(colspan: 9, [#h(2%) *Arithmetic / Logic instructions*]),
   //add
   [ADD rd, rs, rt],[Add],[rd=rs+rt], [`000000`],[`rs`],[`rt`],[`rd`],[`00000`],[`100000`],
   [ADDU rd, rs, rt],[Add unsigned],[rd=rs+rt], [`000000`],[`rs`],[`rt`],[`rd`],[`00000`],[`100001`],
@@ -133,7 +133,7 @@
   [NOR rd,rs,rt],[Bitwise NOR],[rd=!(rs|rt)],[`000000`],[`rs`],[`rt`],[`rd`],[`00000`],[`100111`],
 
 
-  grid.cell(colspan: 9, [#h(2%) _Multiply / Divide_]),
+  grid.cell(colspan: 9, [#h(2%) *Multiply / Divide*]),
   //multiply
   [MULT rs, rt],[Multiply],[HI, LO = rs*rt],[`000000`],[`rs`],[`rt`],grid.cell(colspan: 2, [`00000 00000`]), [`011000`],
   [MULTU rs, rt],[Multiply unsigned],[HI, LO = rs*rt],[`000000`],[`rs`],[`rt`],grid.cell(colspan: 2, [`00000 00000`]), [`011001`],
@@ -146,7 +146,7 @@
   [MTLO rs],[Move to LO],[LO=rs],[`000000`],[`rs`],grid.cell(colspan: 3, [`00000 00000 00000`]),[`010011`],
 
 
-  grid.cell(colspan: 9, [#h(2%) _Branching_]),
+  grid.cell(colspan: 9, [#h(2%) *Branching*]),
   [B offset],[Branch unconditionally],[pc+=offset*4],grid.cell(colspan: 6, [(Converted by assembler)\*]),
   [BEQ rs, rt, offset],[Branch if equal],[if rs==rt: pc+=offset*4],[`000100`],[`rs`],[`rt`],grid.cell(colspan: 3, [offset]),
   [BNE rs, rt, offset],[Branch if not equal],[if rs!=rt: pc+=offset*4],[`000101`],[`rs`],[`rt`],grid.cell(colspan: 3, [offset]),
@@ -162,7 +162,7 @@
   [SYSCALL],[System call],[epc=pc; pc=0x3c],[`000000`],grid.cell(colspan: 4, [`00000 00000 00000 00000`]), [`001100`],
 
 
-  grid.cell(colspan: 9, [#h(2%) _Memory and Data Management_]),
+  grid.cell(colspan: 9, [#h(2%) *Memory and Data Management*]),
   // [LB rt,offset(rs)],[Load byte],[rt=\*(b\*)(offset+rs)],[`100000`],[`rs`],[`rt`],grid.cell(colspan: 3, [offset]),
   // [LH rt,offset(rs)],[Load halfword],[rt=\*(hw\*)(offset+rs)],[`100001`],[`rs`],[`rt`],grid.cell(colspan: 3, [offset]),
   [LW rt, offset(rs)],[Load word from memory],[rt=\*(int\*)(offset+rs)],[`100011`],[`rs`],[`rt`],grid.cell(colspan: 3, [offset]),
@@ -175,3 +175,4 @@
 )
 
 \* Instruction is not basic; it gets turned into one or more basic instructions by the assembler.
+
